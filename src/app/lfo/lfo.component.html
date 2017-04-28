@@ -1,7 +1,24 @@
-<app-slider [signal]="lfo.frequency"
+
+<app-toggles [options]="kinds"
+             class="lfo-kind-toggle"
+             (toggle)="setKind($event)"
+             [activeOption]="currentKind"></app-toggles>
+
+<app-slider [signal]="lfo.frequency" *ngIf="currentKind === 0"
             style="color:grey"
             [min]="0.1"
             [max]="10.0" [name]="'frequency'"></app-slider>
+
+<app-toggles [options]="noteLengths" *ngIf="currentKind === 1"
+             class="lfo-freq-notes-toggle"
+             (toggle)="setLength($event)"
+             [activeOption]="currentLength"></app-toggles>
+
+
+<app-slider [signal]="lfo.amplitude"
+            style="color:grey"
+            [min]="0.0"
+            [max]="2.0" [name]="'depth'"></app-slider>
 
 <app-toggles [options]="types"
              [name]="'waveform'"
@@ -15,6 +32,7 @@
                  class="lfo-range-toggle"
                  (toggle)="setRange($event)"
                  [activeOption]="activeRange"></app-toggles>
+
     <br>
     <app-source [name]="'out'" [signal]="lfo"></app-source>
 </div>

@@ -1,11 +1,4 @@
-<svg class="spectrum">
-    <g *ngIf="!!bands">
-        <path fill="none" stroke="lightgrey" *ngFor="let p of paths" [attr.d]="p"></path>
-    </g>
-    <g *ngIf="!!wavePoints">
-        <path fill="none" stroke="black" stroke-opacity="0.75" [attr.d]="w"></path>
-    </g>
-</svg>
+
 
 <div class="master-left">
     <app-slider [signal]="bpm"

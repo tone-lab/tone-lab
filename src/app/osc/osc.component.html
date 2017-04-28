@@ -13,7 +13,11 @@
              (toggle)="setType($event)"
              [activeOption]="currentType"></app-toggles>
 
-
+<app-slider [signal]="osc.frequency"
+            style="color:grey"
+            [min]="0.0"
+            [max]="4000.0"
+            [name]="'frequency'"></app-slider>
 
 <app-slider [signal]="osc.detune"
             style="color:grey"

@@ -23,6 +23,7 @@ import { CompressorComponent } from './compressor/compressor.component';
 import { SignalComponent } from './signal/signal.component';
 import { FrameComponent } from './frame/frame.component';
 import { TriggerComponent } from './trigger/trigger.component';
+import { AnalyserComponent } from './analyser/analyser.component';
 
 @NgModule({
     declarations: [
@@ -44,7 +45,8 @@ import { TriggerComponent } from './trigger/trigger.component';
         CompressorComponent,
         SignalComponent,
         FrameComponent,
-        TriggerComponent
+        TriggerComponent,
+        AnalyserComponent
     ],
     imports: [
         BrowserModule,

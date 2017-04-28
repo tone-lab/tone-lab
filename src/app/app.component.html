@@ -17,6 +17,7 @@
         <app-compressor *ngSwitchCase="'Compressor'"></app-compressor>
         <app-signal *ngSwitchCase="'Slider'"></app-signal>
         <app-trigger *ngSwitchCase="'Trigger'"></app-trigger>
+        <app-analyser *ngSwitchCase="'Analyser'"></app-analyser>
 
     </app-frame>
 </div>
@@ -32,6 +33,7 @@
 <a class="add-module-btn" (click)="add('Compressor')">Compressor</a>
 <a class="add-module-btn" (click)="add('Slider')">Slider</a>
 <a class="add-module-btn" (click)="add('Trigger')">Trigger</a>
+<a class="add-module-btn" (click)="add('Analyser')">Analyser</a>
 
 <app-patch-overlay *ngIf="showPatches"></app-patch-overlay>
 <br clear="both">

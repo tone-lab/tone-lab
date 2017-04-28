@@ -4,7 +4,7 @@
 /dist
 /tmp
 /out-tsc
-
+/tone-lab.github.io
 # dependencies
 /node_modules
 
