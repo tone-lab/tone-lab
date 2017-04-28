@@ -24,6 +24,7 @@ import { SignalComponent } from './signal/signal.component';
 import { FrameComponent } from './frame/frame.component';
 import { TriggerComponent } from './trigger/trigger.component';
 import { AnalyserComponent } from './analyser/analyser.component';
+import { MembraneComponent } from './membrane/membrane.component';
 
 @NgModule({
     declarations: [
@@ -46,7 +47,8 @@ import { AnalyserComponent } from './analyser/analyser.component';
         SignalComponent,
         FrameComponent,
         TriggerComponent,
-        AnalyserComponent
+        AnalyserComponent,
+        MembraneComponent
     ],
     imports: [
         BrowserModule,

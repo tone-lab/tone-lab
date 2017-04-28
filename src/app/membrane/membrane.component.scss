@@ -1,0 +1,38 @@
+.seq-left {
+  float: left;
+}
+.seq-signals {
+  float: left;
+}
+
+.seq-right {
+  float: right;
+}
+
+.seq-btn {
+  cursor: pointer;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  font-size: 8px;
+  font-weight: bold;
+  background-color: whitesmoke;
+  line-height: 32px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+.seq-btn-stop {
+  background-color: lightblue;
+}
+
+.seq-btn-pulse {
+  background-color: red;
+}
+.mem-right {
+  float: right;
+}
+
+.beat-box {
+  width: 128px;
+  height: 128px;
+}

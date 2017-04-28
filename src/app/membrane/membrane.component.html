@@ -1,0 +1,55 @@
+
+<app-sink [name]="'freq'" [signal]="pitch"></app-sink>
+<app-slider [signal]="pitch"
+            style="color:grey"
+            [min]="0.0"
+            [max]="200.0"
+            [name]="'pitch'"></app-slider>
+
+<div class="mem-right">
+
+    <a *ngIf="!isPlaying"
+       (click)="start()" class="seq-btn seq-btn-start">START</a>
+    <a *ngIf="isPlaying"
+       [class.seq-btn-pulse]="pulse"
+       (click)="stop()"
+       class="seq-btn">STOP</a> <br>
+
+    <app-source [name]="'out'" [signal]="synth"></app-source>
+</div>
+
+<div class="seq-left">
+
+    <app-toggles [options]="noteLengths"
+                 [name]="'Period'"
+                 (toggle)="setPeriod($event)"
+                 [activeOption]="currentPeriod"></app-toggles>
+
+
+    <svg class="beat-box">
+
+        <path *ngFor="let d of boxes; let i = index" [attr.d]="d"
+              (click)="toggleBox(i)"
+              [attr.stroke]="activeBox === i ? 'red' : 'none'"
+              [attr.fill]="box[i] ? 'grey' : 'whitesmoke'"></path>
+
+    </svg>
+
+
+</div>
+
+
+<div class="seq-signals">
+    <app-slider (change)="synth.envelope.attack = $event"
+                [style.color]="'grey'"
+                [min]="0.0"
+                [max]="0.5"
+                [defaultValue]="0.01"
+                [name]="'Attack'"></app-slider>
+    <app-slider (change)="synth.envelope.release = $event"
+                [style.color]="'grey'"
+                [min]="0.0"
+                [max]="1.0"
+                [defaultValue]="0.01"
+                [name]="'Release'"></app-slider>
+</div>
