@@ -15,7 +15,7 @@ export class OscComponent {
     types = ['sine', 'sawtooth', 'square', 'triangle'];
 
     currentClass = 0;
-    classes = ['osc', 'fat', 'pwm', 'fm', 'am', 'pulse'];
+    classes = ['simple', 'fat', 'pwm', 'fm', 'am', 'pulse'];
 
     constructor() {
         this.osc = new Tone.OmniOscillator().start();

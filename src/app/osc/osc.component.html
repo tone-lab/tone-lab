@@ -1,3 +1,10 @@
+<div class="osc-top">
+    <app-toggles [options]="classes"
+                 class="osc-class-toggle"
+                 (toggle)="setClass($event)"
+                 [activeOption]="currentClass"></app-toggles>
+</div>
+
 <app-sink [name]="'freq'" [signal]="osc.frequency"></app-sink>
 
 <app-toggles [options]="types" *ngIf="currentClass !== 2 && currentClass !== 5"
@@ -6,11 +13,6 @@
              (toggle)="setType($event)"
              [activeOption]="currentType"></app-toggles>
 
-<app-toggles [options]="classes"
-             [name]="'class'"
-             class="osc-waveform-toggle"
-             (toggle)="setClass($event)"
-             [activeOption]="currentClass"></app-toggles>
 
 
 <app-slider [signal]="osc.detune"
