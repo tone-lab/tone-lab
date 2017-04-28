@@ -1,7 +1,7 @@
 body {
   font-family: monospace;
-  user-select: none;
   margin: 1em;
+  user-select: none;
 }
 
 .main {
@@ -48,6 +48,17 @@ body {
   font-size: 6px;
   line-height: 10px;
   text-align: center;
+}
+
+
+.footer-message {
+  border-top: 5px solid whitesmoke;
+  padding: 5px;
+  color: lightgrey;
+  margin-top: 5em;
+  font-weight:bold;
+  text-transform: lowercase;
+
 }
 
 

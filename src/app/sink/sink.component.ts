@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
 import {PatchesService} from "../patches.service";
 
 @Component({
@@ -6,11 +6,13 @@ import {PatchesService} from "../patches.service";
     templateUrl: './sink.component.html',
     styleUrls: ['./sink.component.scss']
 })
-export class SinkComponent implements AfterViewInit {
+export class SinkComponent implements AfterViewInit, OnDestroy {
 
     @Input() name: string = '';
     @Input() signal;
     @ViewChild('socket') socket: ElementRef;
+
+    isSelected: boolean = false;
 
     constructor(private patches: PatchesService) {}
 
@@ -27,5 +29,9 @@ export class SinkComponent implements AfterViewInit {
     ngAfterViewInit()
     {
         this.patches.registerTarget(this.socket, this);
+    }
+
+    ngOnDestroy() {
+        this.patches.deregisterTarget(this);
     }
 }

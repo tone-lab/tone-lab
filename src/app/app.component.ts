@@ -33,6 +33,6 @@ export class AppComponent
     }
 
     remove(i) {
-        this.modules = this.modules.splice(1, 1);
+        this.modules.splice(i, 1);
     }
 }

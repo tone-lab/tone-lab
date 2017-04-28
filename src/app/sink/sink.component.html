@@ -5,7 +5,7 @@
             width="90"
             height="90"
             fill="none"
-            stroke="grey"
+            [attr.stroke]="isSelected ? 'red' : 'grey'"
             stroke-width="5"></rect>
 
     <text *ngIf="!!name"

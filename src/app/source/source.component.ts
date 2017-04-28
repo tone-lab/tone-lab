@@ -69,7 +69,14 @@ export class SourceComponent implements AfterViewInit, OnDestroy {
         const drag = down.mergeMap((md: MouseEvent) => {
             return move
                 .map(([mm, s]) => mm)
-                .do((mm: MouseEvent) => this.cable.movePatch(mm))
+                .do((mm: MouseEvent) => {
+                    this.cable.movePatch(mm);
+                    this.patches.resetSelection();
+                    const target = this.patches.locateTarget(mm);
+                    if (target) {
+                        target.isSelected = true;
+                    }
+                })
                 .skipUntil(up
                     .take(1)
                     .do(() => this.cable.endPatch()))
@@ -82,6 +89,7 @@ export class SourceComponent implements AfterViewInit, OnDestroy {
                 this.patches.connect(this, target);
                 this.signal.connect(target.signal);
             }
+            this.patches.resetSelection();
         });
     }
 

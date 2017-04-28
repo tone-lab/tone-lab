@@ -18,11 +18,9 @@ export class CompressorComponent implements OnDestroy {
 
     constructor() {
         this.comp = new Tone.Compressor();
-        console.log(this.comp._compressor);
         this.anim = IntervalObservable.create(500)
             .subscribe(() => {
                 this.reduction = this.comp._compressor.reduction;
-                console.log(this.reduction);
             });
     }
 

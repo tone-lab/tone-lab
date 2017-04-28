@@ -28,6 +28,14 @@ export class PatchesService {
         this.sockets.push({x1, y1, x2, y2, sink});
     }
 
+    public resetSelection() {
+        _.map(this.sockets, s => s.sink.isSelected = false);
+    }
+
+    public deregisterTarget(sink: SinkComponent) {
+        this.sockets = _.filter(this.sockets, s => s !== sink);
+    }
+
     public removeConnectionsFor(socket: SourceComponent) {
         return _.remove(this.connections, ({source, target}) => {
             return source === socket || target === socket;

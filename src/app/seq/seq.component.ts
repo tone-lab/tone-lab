@@ -30,7 +30,9 @@ export class SeqComponent implements OnInit {
 
     // from A0 to C8
     // public cv = new Tone.Scale(27, 4186);
-    freqConv = new Tone.CtrlInterpolate([27, 4186]);
+
+    // C1 - C5 = 32.708 - 523.25
+    freqConv = new Tone.CtrlInterpolate([32.708, 523.25]);
 
     public freq = new Tone.Signal();
     public gate = new Tone.Envelope({
