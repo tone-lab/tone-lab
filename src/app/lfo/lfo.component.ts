@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {SourceComponent} from "../source/source.component";
 
 declare const Tone: any;
 
@@ -41,4 +42,5 @@ export class LfoComponent implements OnInit {
         this.currentType = i;
         this.lfo.type = this.types[i];
     }
+
 }

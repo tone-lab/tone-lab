@@ -1,7 +1,5 @@
-<div class="instr">
-    <h1 class="instr-title">Oscillator</h1>
 
-    <div class="instr-controls">
+
         <app-sink [name]="'freq'" [signal]="osc.frequency"></app-sink>
 
         <app-toggles [options]="types"
@@ -18,6 +16,4 @@
                     [name]="'volume'"></app-slider>
 
         <app-source [name]="'out'" [signal]="osc"></app-source>
-        <br clear="both">
-    </div>
-</div>
+

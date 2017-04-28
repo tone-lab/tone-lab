@@ -19,6 +19,9 @@ import { GainComponent } from './gain/gain.component';
 import { SliderComponent } from './slider/slider.component';
 import { TogglesComponent } from './toggles/toggles.component';
 import { NoiseComponent } from './noise/noise.component';
+import { CompressorComponent } from './compressor/compressor.component';
+import { SignalComponent } from './signal/signal.component';
+import { FrameComponent } from './frame/frame.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +39,10 @@ import { NoiseComponent } from './noise/noise.component';
         GainComponent,
         SliderComponent,
         TogglesComponent,
-        NoiseComponent
+        NoiseComponent,
+        CompressorComponent,
+        SignalComponent,
+        FrameComponent
     ],
     imports: [
         BrowserModule,

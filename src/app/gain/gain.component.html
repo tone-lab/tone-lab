@@ -1,13 +1,7 @@
-<div class="instr">
-    <h1 class="instr-title">Gain</h1>
 
-    <div class="instr-controls">
+
         <app-sink [name]="'in'" [signal]="gain"></app-sink>
         <br>
         <app-sink [name]="'cv'" [signal]="gain.gain"></app-sink>
         <br>
         <app-source [name]="'out'" [signal]="gain"></app-source>
-        <br clear="both">
-    </div>
-
-</div>

@@ -1,27 +1,35 @@
 <div class="main">
-    <app-mixer></app-mixer>
+    <app-frame [name]="'Mixer (Master Output)'">
+        <app-mixer></app-mixer>
+    </app-frame>
 
-    <div *ngFor="let m of modules" [ngSwitch]="m">
+    <app-frame [name]="m" (closed)="remove(i)"
+               *ngFor="let m of modules; let i = index"
+               [ngSwitch]="m">
 
-        <div *ngSwitchCase="'filter'"><app-filter></app-filter></div>
-        <div *ngSwitchCase="'gain'"><app-gain></app-gain></div>
-        <div *ngSwitchCase="'lfo'"><app-lfo></app-lfo></div>
-        <div *ngSwitchCase="'noise'"><app-noise></app-noise></div>
-        <div *ngSwitchCase="'osc'"><app-osc></app-osc></div>
-        <div *ngSwitchCase="'pingpong'"><app-pingpong></app-pingpong></div>
-        <div *ngSwitchCase="'seq'"><app-seq></app-seq></div>
+        <app-lfo *ngSwitchCase="'LFO'"></app-lfo>
+        <app-filter *ngSwitchCase="'Filter'"></app-filter>
+        <app-gain *ngSwitchCase="'Gain'"></app-gain>
+        <app-noise *ngSwitchCase="'Noise'"></app-noise>
+        <app-osc *ngSwitchCase="'Oscillator'"></app-osc>
+        <app-pingpong *ngSwitchCase="'Ping Pong'"></app-pingpong>
+        <app-seq *ngSwitchCase="'Sequencer'"></app-seq>
+        <app-compressor *ngSwitchCase="'Compressor'"></app-compressor>
+        <app-signal *ngSwitchCase="'Slider'"></app-signal>
 
-    </div>
+    </app-frame>
 </div>
 
 <br clear="both">
-<a class="add-module-btn" (click)="add('osc')">Oscillator</a>
-<a class="add-module-btn" (click)="add('filter')">Filter</a>
-<a class="add-module-btn" (click)="add('gain')">Gain</a>
-<a class="add-module-btn" (click)="add('lfo')">LFO</a>
-<a class="add-module-btn" (click)="add('noise')">Noise</a>
-<a class="add-module-btn" (click)="add('seq')">Sequencer</a>
-<a class="add-module-btn" (click)="add('pingpong')">Ping Pong</a>
+<a class="add-module-btn" (click)="add('Oscillator')">Oscillator</a>
+<a class="add-module-btn" (click)="add('Filter')">Filter</a>
+<a class="add-module-btn" (click)="add('Gain')">Gain</a>
+<a class="add-module-btn" (click)="add('LFO')">LFO</a>
+<a class="add-module-btn" (click)="add('Noise')">Noise</a>
+<a class="add-module-btn" (click)="add('Sequencer')">Sequencer</a>
+<a class="add-module-btn" (click)="add('Ping Pong')">Ping Pong</a>
+<a class="add-module-btn" (click)="add('Compressor')">Compressor</a>
+<a class="add-module-btn" (click)="add('Slider')">Slider</a>
 
-<app-patch-overlay></app-patch-overlay>
+<app-patch-overlay *ngIf="showPatches"></app-patch-overlay>
 <br clear="both">

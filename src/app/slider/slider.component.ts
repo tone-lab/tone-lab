@@ -1,4 +1,7 @@
-import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+    AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output,
+    ViewChild
+} from '@angular/core';
 import {Subscription} from "rxjs/Subscription";
 import {Observable} from "rxjs/Observable";
 
@@ -18,14 +21,24 @@ export class SliderComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() signal: AudioParam;
     @Input() min;
     @Input() max;
+    @Input() defaultValue;
+    @Output() change = new EventEmitter<number>();
 
     @ViewChild('slider') slider: ElementRef;
     handle: Subscription;
     pt: SVGPoint;
     cursorPt: SVGPoint = {x: 0, y: 0} as any;
 
+    constructor() {
+    }
+
     ngOnInit()
     {
+        if (!this.signal) {
+            this.signal = new Tone.Signal((!!this.defaultValue)
+                ? this.defaultValue
+                : (this.max - this.min) / 2);
+        }
         const scaledValue = (this.signal.value - this.min) / (this.max - this.min);
         this.cursorPt = {x: 0, y: 128 - (scaledValue * 128)} as any;
     }
@@ -56,6 +69,7 @@ export class SliderComponent implements OnInit, AfterViewInit, OnDestroy {
                 const normalValue = 1 - (this.cursorPt.y / 128);
                 const scaledValue = (normalValue * (this.max - this.min)) + this.min;
                 this.signal.setValueAtTime(scaledValue, 0.1);
+                this.change.emit(scaledValue);
             });
     }
 

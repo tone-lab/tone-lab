@@ -1,8 +1,5 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {SeqComponent} from "./seq/seq.component";
-import {OscComponent} from "./osc/osc.component";
-import {LfoComponent} from "./lfo/lfo.component";
-import {FilterComponent} from "./filter/filter.component";
+import {Component, NgZone} from '@angular/core';
+import {PatchesService} from "./patches.service";
 
 declare const Tone: any;
 
@@ -15,14 +12,27 @@ export class AppComponent
 {
     master;
 
+    showPatches: boolean = true;
+
     modules = [];
 
-    constructor() {
+    constructor(
+        private zone: NgZone,
+        private patches: PatchesService
+    ) {
         Tone.Transport.start();
         this.master = Tone.Master;
     }
 
     add(t) {
+        this.showPatches = false;
         this.modules.push(t);
+        setTimeout(() => {
+            this.zone.run(() => this.showPatches = true);
+        }, 10);
+    }
+
+    remove(i) {
+        this.modules = this.modules.splice(1, 1);
     }
 }

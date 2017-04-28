@@ -32,5 +32,22 @@ body {
 }
 
 .instr-controls {
-  padding: 1em;
+  padding: 1em 0.3em 1em 1em;
 }
+
+.instr-close {
+  float: right;
+  margin: 2px 2px 0 0;
+  cursor: pointer;
+  background-color: lightgray;
+  color: white;
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  border-radius: 8px;
+  font-size: 6px;
+  line-height: 10px;
+  text-align: center;
+}
+
+

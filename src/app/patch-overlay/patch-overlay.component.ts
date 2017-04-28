@@ -37,9 +37,11 @@ export class PatchOverlayComponent implements AfterViewInit {
 
     ngAfterViewInit()
     {
-        setTimeout(() => {
-            this.w = document.body.clientWidth;
-            this.h = document.body.clientHeight;
-        }, 10);
+        setTimeout(() => this.calculateSize(), 10);
+    }
+
+    calculateSize() {
+        this.w = document.body.clientWidth;
+        this.h = document.body.clientHeight;
     }
 }

@@ -64,7 +64,7 @@ export class SeqComponent implements OnInit {
 
             // from A0 to C8
             this.freqConv.index = this.signals[i].value;
-            this.freq.linearRampToValue(this.freqConv.value, 0.1, time);
+            this.freq.linearRampToValue(this.freqConv.value, 0.01, time);
             this.gate.triggerAttackRelease(this.noteLength, time);
 
             Tone.Draw.schedule(() => {
@@ -73,7 +73,7 @@ export class SeqComponent implements OnInit {
 
         }, _.range(8), this.period);
         if (wasPlaying) {
-            this.sequence.start(0.1);
+            this.sequence.start(0.01);
         }
     }
 
@@ -90,17 +90,17 @@ export class SeqComponent implements OnInit {
 
     seq() {
         if (this.sequence) {
-            this.sequence.stop(0.1);
+            this.sequence.stop(0.01);
         }
         this.configureSequence();
-        this.sequence.start(0.1);
+        this.sequence.start(0.01);
         this.isPlaying = true;
     }
 
     stop() {
         if (this.sequence) {
-            this.sequence.stop(0.1);
-            this.sequence.cancel(0.1);
+            this.sequence.stop(0.01);
+            this.sequence.cancel(0.01);
         }
         this.activeSignal = -1;
         this.isPlaying = false;

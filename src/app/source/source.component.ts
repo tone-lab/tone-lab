@@ -86,6 +86,8 @@ export class SourceComponent implements AfterViewInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        const old = this.patches.removeConnectionsFor(this);
+        this.signal.disconnect(old.signal);
         this.draggable.unsubscribe();
     }
 }
