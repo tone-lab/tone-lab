@@ -1,0 +1,23 @@
+<div class="instr">
+    <h1 class="instr-title">Oscillator</h1>
+
+    <div class="instr-controls">
+        <app-sink [name]="'freq'" [signal]="osc.frequency"></app-sink>
+
+        <app-toggles [options]="types"
+                     [name]="'waveform'"
+                     class="osc-waveform-toggle"
+                     (toggle)="setType($event)"
+                     [activeOption]="currentType"></app-toggles>
+
+
+        <app-slider [signal]="osc.volume"
+                    style="color:grey"
+                    [min]="-10.0"
+                    [max]="10.0"
+                    [name]="'volume'"></app-slider>
+
+        <app-source [name]="'out'" [signal]="osc"></app-source>
+        <br clear="both">
+    </div>
+</div>

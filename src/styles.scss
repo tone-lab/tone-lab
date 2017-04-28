@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: monospace;
+  user-select: none;
+  margin: 1em;
+}
+
+.main {
+  //display: grid;
+  //grid-gap: 10px;
+  //grid-auto-flow: row;
+  //grid-template-rows: 250px;
+  //grid-template-columns: 300px 300px 300px;
+}
+
+.instr {
+  border: 1px solid whitesmoke;
+  float: left;
+  height: 200px;
+  margin: 0 1em 1em 0;
+}
+
+.instr-title {
+  background-color: whitesmoke;
+  text-transform: uppercase;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 8px;
+  color: grey;
+  line-height: 16px;
+  padding: 0 0 0 8px;
+  margin: 0;
+}
+
+.instr-controls {
+  padding: 1em;
+}

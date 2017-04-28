@@ -1,0 +1,12 @@
+.add-module-btn {
+  cursor: pointer;
+  font-size: 8px;
+  font-weight: bold;
+  padding: 5px;
+  margin: 0 5px 5px 0;
+  background: whitesmoke;
+  text-transform: uppercase;
+}
+.add-module-btn:before {
+  content: '+ ';
+}

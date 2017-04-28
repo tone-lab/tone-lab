@@ -1,0 +1,25 @@
+.seq-signals {
+  float: left;
+}
+
+.seq-left {
+  float: left;
+}
+.seq-right {
+  float: right;
+}
+
+.seq-btn {
+  cursor: pointer;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  font-size: 8px;
+  font-weight: bold;
+  background-color: whitesmoke;
+  line-height: 32px;
+  text-align: center;
+}
+.seq-btn-stop {
+  background-color: lightblue;
+}

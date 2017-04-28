@@ -1,0 +1,24 @@
+<div class="socket" #socket>
+    <svg viewBox="0 0 100 100">
+
+        <circle r="45"
+                cx="50"
+                cy="50"
+                fill="none"
+                stroke="grey"
+                stroke-width="5"></circle>
+
+        <text *ngIf="!!name"
+              fill="gray"
+              font-family="monospace"
+              x="50"
+              y="56"
+              font-size="24"
+              text-anchor="middle">
+            {{ name }}
+        </text>
+
+    </svg>
+</div>
+
+<app-cable #cable></app-cable>

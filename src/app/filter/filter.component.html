@@ -1,0 +1,37 @@
+<div class="instr">
+    <h1 class="instr-title">Filter</h1>
+
+    <div class="instr-controls">
+
+        <div class="filter-left">
+            <app-sink [name]="'in'" [signal]="filter"></app-sink>
+            <br>
+            <app-sink [name]="'freq'" [signal]="filter.frequency"></app-sink>
+            <br>
+            <app-source [name]="'out'" [signal]="filter"></app-source>
+            <br>
+            <app-toggles [options]="rollOffs"
+                         [name]="'rolloff'"
+                         class="filter-rolloff-toggle"
+                         (toggle)="setRollOff($event)"
+                         [activeOption]="activeRollOff"></app-toggles>
+        </div>
+
+
+
+        <app-toggles [options]="filterTypes"
+                     [name]="'type'"
+                     class="filter-type-toggle"
+                     (toggle)="setType($event)"
+                     [activeOption]="activeFilterType"></app-toggles>
+
+
+        <app-slider [signal]="filter.Q"
+                    style="color:grey"
+                    [min]="0.0"
+                    [max]="10.0"
+                    [name]="'Q'"></app-slider>
+
+        <br clear="both">
+    </div>
+</div>

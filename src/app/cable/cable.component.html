@@ -1,0 +1,15 @@
+<div class="patch-overlay" *ngIf="isPatching">
+    <svg width="100%" height="100%">
+        <path [attr.d]="path" stroke="red" fill="none"
+              stroke-opacity="0.5"
+              stroke-linecap="round"
+              stroke-width="5"></path>
+
+        <circle r="7" [attr.cx]="cX1" [attr.cy]="cY1" fill="red"
+                fill-opacity="0.5">
+        </circle>
+        <circle r="7" [attr.cx]="cX2" [attr.cy]="cY2" fill="red"
+                fill-opacity="0.5">
+        </circle>
+    </svg>
+</div>

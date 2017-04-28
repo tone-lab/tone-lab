@@ -1,0 +1,27 @@
+<div class="instr">
+    <h1 class="instr-title">LFO</h1>
+
+    <div class="instr-controls">
+        <app-slider [signal]="lfo.frequency"
+                    style="color:grey"
+                    [min]="0.1"
+                    [max]="10.0" [name]="'frequency'"></app-slider>
+
+        <app-toggles [options]="types"
+                     [name]="'waveform'"
+                     class="lfo-waveform-toggle"
+                     (toggle)="setType($event)"
+                     [activeOption]="currentType"></app-toggles>
+
+        <div class="lfo-right">
+            <app-toggles [options]="rangeLabels"
+                         [name]="'range'"
+                         class="lfo-range-toggle"
+                         (toggle)="setRange($event)"
+                         [activeOption]="activeRange"></app-toggles>
+            <br>
+            <app-source [name]="'out'" [signal]="lfo"></app-source>
+        </div>
+        <br clear="both">
+    </div>
+</div>

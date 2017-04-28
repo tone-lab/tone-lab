@@ -1,0 +1,29 @@
+<div class="instr">
+    <h1 class="instr-title">Ping Pong</h1>
+
+    <div class="instr-controls">
+
+        <div class="ping-pong-left">
+            <app-sink [name]="'in'" [signal]="delay"></app-sink>
+            <br>
+            <app-sink [name]="'time'" [signal]="delay.delayTime"></app-sink>
+            <br>
+            <app-source [name]="'out'" [signal]="delay"></app-source>
+        </div>
+
+
+        <app-slider [signal]="delay.feedback"
+                    style="color:grey"
+                    [min]="0.0"
+                    [max]="1.0"
+                    [name]="'feedback'"></app-slider>
+
+        <app-slider [signal]="delay.wet"
+                    style="color:grey"
+                    [min]="0.0"
+                    [max]="1.0"
+                    [name]="'wet/dry'"></app-slider>
+
+        <br clear="both">
+    </div>
+</div>

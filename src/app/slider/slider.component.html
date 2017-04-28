@@ -1,0 +1,10 @@
+<!--<input [(ngModel)]="signal.value" type="range" -->
+       <!--[attr.min]="min" [attr.max]="1.0" step="0.01">-->
+
+<div class="slider">
+    <svg viewBox="0 0 32 128" #slider>
+        <text y="-8" fill="lightgrey" class="slider-text" *ngIf="!!name" transform="rotate(90)">{{ name }}</text>
+        <path d="M 16 0 v 128" fill="none" stroke="grey"></path>
+        <circle r="4" cx="16" [attr.cy]="cursorPt.y" fill="currentColor"></circle>
+    </svg>
+</div>

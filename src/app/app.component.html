@@ -1,3 +1,27 @@
-<h1>
-  {{title}}
-</h1>
+<div class="main">
+    <app-mixer></app-mixer>
+
+    <div *ngFor="let m of modules" [ngSwitch]="m">
+
+        <div *ngSwitchCase="'filter'"><app-filter></app-filter></div>
+        <div *ngSwitchCase="'gain'"><app-gain></app-gain></div>
+        <div *ngSwitchCase="'lfo'"><app-lfo></app-lfo></div>
+        <div *ngSwitchCase="'noise'"><app-noise></app-noise></div>
+        <div *ngSwitchCase="'osc'"><app-osc></app-osc></div>
+        <div *ngSwitchCase="'pingpong'"><app-pingpong></app-pingpong></div>
+        <div *ngSwitchCase="'seq'"><app-seq></app-seq></div>
+
+    </div>
+</div>
+
+<br clear="both">
+<a class="add-module-btn" (click)="add('osc')">Oscillator</a>
+<a class="add-module-btn" (click)="add('filter')">Filter</a>
+<a class="add-module-btn" (click)="add('gain')">Gain</a>
+<a class="add-module-btn" (click)="add('lfo')">LFO</a>
+<a class="add-module-btn" (click)="add('noise')">Noise</a>
+<a class="add-module-btn" (click)="add('seq')">Sequencer</a>
+<a class="add-module-btn" (click)="add('pingpong')">Ping Pong</a>
+
+<app-patch-overlay></app-patch-overlay>
+<br clear="both">

@@ -1,0 +1,27 @@
+.toggle {
+  //padding: 8px;
+}
+.toggle-label {
+  font-size: 8px;
+  margin: 0 4px 4px 0;
+  color: lightgray;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.toggle-option {
+  font-size: 8px;
+  cursor: pointer;
+  display: inline-block;
+}
+.toggle-option > a {
+  padding: 4px;
+  background-color: whitesmoke;
+  margin: 0 4px 4px 0;
+  display: block;
+}
+.toggle-option > b {
+  padding: 4px;
+  background-color: lightblue;
+  margin: 0 4px 4px 0;
+  display: block;
+}

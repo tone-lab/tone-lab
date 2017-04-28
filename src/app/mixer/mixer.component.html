@@ -1,0 +1,18 @@
+<div class="instr">
+    <h1 class="instr-title">Mixer (Main Output)</h1>
+
+    <div class="instr-controls">
+
+        <div class="mixer-channel" *ngFor="let c of channels">
+            <app-slider [signal]="c.gain"
+                        style="color:grey"
+                        [min]="0.0"
+                        [max]="1.0"
+                        [name]="'volume'"></app-slider>
+            <br>
+            <app-sink [signal]="c"></app-sink>
+        </div>
+
+        <br clear="both">
+    </div>
+</div>

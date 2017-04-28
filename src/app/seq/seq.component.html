@@ -1,0 +1,35 @@
+<div class="instr">
+    <h1 class="instr-title">Sequencer</h1>
+
+    <div class="instr-controls">
+
+        <div class="seq-signals" *ngFor="let c of signals; let i = index">
+            <app-slider [signal]="c"
+                        [style.color]="i === activeSignal ? 'red' : 'grey'"
+                        [min]="0.0"
+                        [max]="1.0"
+                        [name]="i + 1"></app-slider>
+        </div>
+
+        <div class="seq-left">
+            <app-toggles [options]="noteLengths"
+                         [name]="'Period'"
+                         (toggle)="setPeriod($event)"
+                         [activeOption]="currentPeriod"></app-toggles>
+
+            <app-toggles [options]="noteLengths"
+                         [name]="'Note length'"
+                         (toggle)="setLength($event)"
+                         [activeOption]="currentLength"></app-toggles>
+        </div>
+        <br>
+        <div class="seq-right">
+            <a *ngIf="!isPlaying" (click)="seq()" class="seq-btn seq-btn-start">START</a>
+            <a *ngIf="isPlaying" (click)="stop()" class="seq-btn seq-btn-stop">STOP</a>
+
+            <app-source [name]="'freq'" [signal]="freq"></app-source>
+            <app-source [name]="'gate'" [signal]="gate"></app-source>
+        </div>
+        <br clear="both">
+    </div>
+</div>

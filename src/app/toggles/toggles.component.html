@@ -1,0 +1,10 @@
+<div class="toggle">
+    <div class="toggle-label" *ngIf="!!name">{{ name }}</div>
+
+    <div class="toggle-option" *ngFor="let r of options;let i = index">
+
+        <a (click)="pickOption(i)" *ngIf="i !== activeOption">{{ r }}</a>
+        <b *ngIf="i === activeOption">{{ r }}</b>
+
+    </div>
+</div>
