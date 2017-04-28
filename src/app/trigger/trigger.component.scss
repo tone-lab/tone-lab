@@ -1,13 +1,3 @@
-.seq-signals {
-  float: left;
-}
-
-.seq-left {
-  float: left;
-}
-.seq-right {
-  float: right;
-}
 
 .seq-btn {
   cursor: pointer;
@@ -23,7 +13,12 @@
 .seq-btn-stop {
   background-color: lightblue;
 }
-
 .seq-btn-pulse {
   background-color: red;
+}
+.seq-signals {
+  float: right;
+}
+.seq-left {
+  float: left;
 }

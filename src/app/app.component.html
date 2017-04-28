@@ -16,6 +16,7 @@
         <app-seq *ngSwitchCase="'Sequencer'"></app-seq>
         <app-compressor *ngSwitchCase="'Compressor'"></app-compressor>
         <app-signal *ngSwitchCase="'Slider'"></app-signal>
+        <app-trigger *ngSwitchCase="'Trigger'"></app-trigger>
 
     </app-frame>
 </div>
@@ -30,6 +31,7 @@
 <a class="add-module-btn" (click)="add('Ping Pong')">Ping Pong</a>
 <a class="add-module-btn" (click)="add('Compressor')">Compressor</a>
 <a class="add-module-btn" (click)="add('Slider')">Slider</a>
+<a class="add-module-btn" (click)="add('Trigger')">Trigger</a>
 
 <app-patch-overlay *ngIf="showPatches"></app-patch-overlay>
 <br clear="both">

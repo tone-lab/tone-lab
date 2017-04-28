@@ -22,6 +22,7 @@ import { NoiseComponent } from './noise/noise.component';
 import { CompressorComponent } from './compressor/compressor.component';
 import { SignalComponent } from './signal/signal.component';
 import { FrameComponent } from './frame/frame.component';
+import { TriggerComponent } from './trigger/trigger.component';
 
 @NgModule({
     declarations: [
@@ -42,7 +43,8 @@ import { FrameComponent } from './frame/frame.component';
         NoiseComponent,
         CompressorComponent,
         SignalComponent,
-        FrameComponent
+        FrameComponent,
+        TriggerComponent
     ],
     imports: [
         BrowserModule,

@@ -20,8 +20,10 @@
                          (toggle)="setLength($event)"
                          [activeOption]="currentLength"></app-toggles>
             <br>
-            <a *ngIf="!isPlaying" (click)="seq()" class="seq-btn seq-btn-start">START</a>
-            <a *ngIf="isPlaying" (click)="stop()" class="seq-btn seq-btn-stop">STOP</a>
+            <a *ngIf="!isPlaying" (click)="seq()"
+               class="seq-btn seq-btn-start">START</a>
+            <a *ngIf="isPlaying" (click)="stop()"
+               [class.seq-btn-pulse]="pulse" class="seq-btn">STOP</a>
 
             <app-source [name]="'freq'" [signal]="freq"></app-source>
 

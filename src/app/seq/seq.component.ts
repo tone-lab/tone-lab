@@ -23,6 +23,8 @@ export class SeqComponent implements OnInit {
 
     sequence;
 
+    pulse: boolean = false;
+
     activeSignal = -1;
     currentPeriod = 3;
     currentLength = 2;
@@ -71,11 +73,13 @@ export class SeqComponent implements OnInit {
 
             Tone.Draw.schedule(() => {
                 this.zone.run(() => this.activeSignal = i);
+                this.zone.run(() => this.pulse = !this.pulse);
             }, time);
 
         }, _.range(8), this.period);
         if (wasPlaying) {
-            this.sequence.start(0.01);
+            this.pulse = false;
+            this.sequence.start('@4n');
         }
     }
 
@@ -92,19 +96,21 @@ export class SeqComponent implements OnInit {
 
     seq() {
         if (this.sequence) {
-            this.sequence.stop(0.01);
+            this.sequence.stop();
         }
         this.configureSequence();
-        this.sequence.start(0.01);
+        this.sequence.start('@4n');
+        this.pulse = false;
         this.isPlaying = true;
     }
 
     stop() {
         if (this.sequence) {
-            this.sequence.stop(0.01);
-            this.sequence.cancel(0.01);
+            this.sequence.stop();
+            this.sequence.cancel();
         }
         this.activeSignal = -1;
+        this.pulse = false;
         this.isPlaying = false;
     }
 

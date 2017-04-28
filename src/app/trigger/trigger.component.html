@@ -1,0 +1,36 @@
+<div class="seq-left">
+
+    <app-toggles [options]="noteLengths"
+                 [name]="'Period'"
+                 (toggle)="setPeriod($event)"
+                 [activeOption]="currentPeriod"></app-toggles>
+
+    <app-toggles [options]="noteLengths"
+                 [name]="'Note length'"
+                 (toggle)="setLength($event)"
+                 [activeOption]="currentLength"></app-toggles>
+
+    <a *ngIf="!isPlaying"
+       (click)="start()" class="seq-btn seq-btn-start">START</a>
+    <a *ngIf="isPlaying"
+       [class.seq-btn-pulse]="pulse"
+       (click)="stop()"
+       class="seq-btn">STOP</a>
+    <app-source [name]="'env'" [signal]="gate"></app-source>
+</div>
+
+
+<div class="seq-signals">
+    <app-slider (change)="gate.attack = $event"
+                [style.color]="'grey'"
+                [min]="0.0"
+                [max]="1.0"
+                [defaultValue]="0.01"
+                [name]="'Attack'"></app-slider>
+    <app-slider (change)="gate.release = $event"
+                [style.color]="'grey'"
+                [min]="0.0"
+                [max]="1.0"
+                [defaultValue]="0.01"
+                [name]="'Release'"></app-slider>
+</div>
