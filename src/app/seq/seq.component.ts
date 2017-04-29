@@ -15,6 +15,7 @@ export class SeqComponent implements OnInit {
     noteLength = '8n';
 
     signals = [];
+    activeSignals = [];
 
     ngOnInit() {
     }
@@ -54,6 +55,8 @@ export class SeqComponent implements OnInit {
             new Tone.Signal(0),
             new Tone.Signal(0)
         ];
+        this.activeSignals = _.fill(_.range(8), 1);
+        console.log(this.activeSignals);
         this.configureSequence();
     }
 
@@ -66,10 +69,12 @@ export class SeqComponent implements OnInit {
         this.sequence = new Tone.Sequence((time, i) => {
 
 
-            // from A0 to C8
-            this.freqConv.index = this.signals[i].value;
-            this.freq.linearRampToValue(this.freqConv.value, 0.01, time);
-            this.gate.triggerAttackRelease(this.noteLength, time);
+            if (this.activeSignals[i] === 1) {
+                // from A0 to C8
+                this.freqConv.index = this.signals[i].value;
+                this.freq.linearRampToValue(this.freqConv.value, 0.01, time);
+                this.gate.triggerAttackRelease(this.noteLength, time);
+            }
 
             Tone.Draw.schedule(() => {
                 this.zone.run(() => this.activeSignal = i);
