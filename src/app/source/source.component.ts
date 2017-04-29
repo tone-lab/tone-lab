@@ -56,7 +56,9 @@ export class SourceComponent implements AfterViewInit, OnDestroy {
     }
     removeConnectionToSink(i) {
         this.menuActive = false;
-        const olds = this.patches.removeConnection(this, i);
+        const olds = this.patches.removeConnectionsFor(this);
+        // TODO: allow individual disconnections via gain node on connection
+        // const olds = this.patches.removeConnection(this, i);
         _.map(olds, o => this.signal.disconnect(o.signal));
     }
 
