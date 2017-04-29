@@ -13,7 +13,7 @@ export class GainComponent implements OnInit {
     gain;
 
     constructor() {
-        this.gain = new Tone.Gain(0).toMaster();
+        this.gain = new Tone.Gain(0);
     }
 
     ngOnInit() {
