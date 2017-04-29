@@ -9,6 +9,7 @@ import {PatchesService} from "../patches.service";
 export class SinkComponent implements AfterViewInit, OnDestroy {
 
     @Input() name: string = '';
+    @Input() parent: string = '';
     @Input() signal;
     @ViewChild('socket') socket: ElementRef;
 

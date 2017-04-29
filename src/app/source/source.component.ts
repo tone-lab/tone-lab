@@ -14,6 +14,8 @@ import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/skipUntil';
 import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/concat';
+import 'rxjs/add/operator/merge';
 
 import {PatchesService} from "../patches.service";
 import {CableComponent} from "../cable/cable.component";
@@ -33,6 +35,8 @@ export class SourceComponent implements AfterViewInit, OnDestroy {
     @ViewChild('cable') cable: CableComponent;
 
     draggable: Subscription;
+    menu: Subscription;
+    menuActive: boolean = false;
 
     constructor(private patches: PatchesService) {}
 
@@ -46,15 +50,36 @@ export class SourceComponent implements AfterViewInit, OnDestroy {
         return {x, y};
     }
 
+    get sinks() {
+        const s = this.patches.getConnectionsFor(this);
+        return _.map(s, ({sink}, i) => `${i}:${sink.parent}:${sink.name}`);
+    }
+    removeConnectionToSink(i) {
+        this.menuActive = false;
+        const olds = this.patches.removeConnection(this, i);
+        _.map(olds, o => this.signal.disconnect(o.signal));
+    }
+
     ngAfterViewInit()
     {
+        this.menu = Observable.fromEvent(this.socket.nativeElement, 'mousedown')
+            .filter((e: MouseEvent) => ((e.which && e.which == 3) || (e.button && e.button == 2)))
+            .do((e: MouseEvent) => e.preventDefault())
+            // .do(e => this.menuActive = true)
+            // .mergeMap(e => Observable.fromEvent(document, 'mouseup')
+            //     .do(e => this.menuActive = false)
+            //     .take(1))
+            .subscribe(() => this.menuActive = true);
+
+
         const down = Observable.fromEvent(this.socket.nativeElement, 'mousedown')
-            .do((e: MouseEvent) => e.stopPropagation())
+            .filter((e: MouseEvent) => !((e.which && e.which == 3) || (e.button && e.button == 2)))
+            .do((e: MouseEvent) => e.preventDefault())
             .do((e: MouseEvent) => this.cable.startPatch(this.socket, e))
 
             .do((e: MouseEvent) => {
-                const old = this.patches.removeConnectionsFor(this);
-                this.signal.disconnect(old.signal);
+                // const old = this.patches.removeConnectionsFor(this);
+                // this.signal.disconnect(old.signal);
             });
 
         const up = Observable.fromEvent(document, 'mouseup')
@@ -85,7 +110,7 @@ export class SourceComponent implements AfterViewInit, OnDestroy {
 
         this.draggable = drag.subscribe((e: MouseEvent) => {
             const target = this.patches.locateTarget(e);
-            if (target) {
+            if (target && this.patches.notConnected(this, target)) {
                 this.patches.connect(this, target);
                 this.signal.connect(target.signal);
             }
@@ -97,5 +122,6 @@ export class SourceComponent implements AfterViewInit, OnDestroy {
         const old = this.patches.removeConnectionsFor(this);
         this.signal.disconnect(old.signal);
         this.draggable.unsubscribe();
+        this.menu.unsubscribe();
     }
 }

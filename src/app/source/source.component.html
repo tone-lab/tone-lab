@@ -21,4 +21,14 @@
     </svg>
 </div>
 
+<div class="patch-menu"
+     [style.top.px]="centrePoint().y"
+     [style.left.px]="centrePoint().x" *ngIf="menuActive">
+    <a class="patch-menu-close" (click)="menuActive = false">cancel</a>
+    <a *ngFor="let s of sinks; let i = index"
+       class="patch-menu-item" (click)="removeConnectionToSink(i)">
+        {{ s }}
+    </a>
+</div>
+
 <app-cable #cable></app-cable>

@@ -22,6 +22,7 @@ export class AppComponent
     ) {
         Tone.Transport.start();
         this.master = Tone.Master;
+        document.oncontextmenu = () => false;
     }
 
     add(t) {

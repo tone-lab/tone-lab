@@ -1,32 +1,28 @@
+<div class="filter-left">
+    <app-sink [name]="'in'" [parent]="'filter'" [signal]="filter"></app-sink>
+    <br>
+    <app-sink [name]="'freq'" [parent]="'filter'" [signal]="filter.frequency"></app-sink>
+    <br>
+    <app-source [name]="'out'" [signal]="filter"></app-source>
+    <br>
+    <app-toggles [options]="rollOffs"
+                 [name]="'rolloff'"
+                 class="filter-rolloff-toggle"
+                 (toggle)="setRollOff($event)"
+                 [activeOption]="activeRollOff"></app-toggles>
+</div>
 
 
-
-        <div class="filter-left">
-            <app-sink [name]="'in'" [signal]="filter"></app-sink>
-            <br>
-            <app-sink [name]="'freq'" [signal]="filter.frequency"></app-sink>
-            <br>
-            <app-source [name]="'out'" [signal]="filter"></app-source>
-            <br>
-            <app-toggles [options]="rollOffs"
-                         [name]="'rolloff'"
-                         class="filter-rolloff-toggle"
-                         (toggle)="setRollOff($event)"
-                         [activeOption]="activeRollOff"></app-toggles>
-        </div>
+<app-toggles [options]="filterTypes"
+             [name]="'type'"
+             class="filter-type-toggle"
+             (toggle)="setType($event)"
+             [activeOption]="activeFilterType"></app-toggles>
 
 
-
-        <app-toggles [options]="filterTypes"
-                     [name]="'type'"
-                     class="filter-type-toggle"
-                     (toggle)="setType($event)"
-                     [activeOption]="activeFilterType"></app-toggles>
-
-
-        <app-slider [signal]="filter.Q"
-                    style="color:grey"
-                    [min]="0.0"
-                    [max]="10.0"
-                    [name]="'Q'"></app-slider>
+<app-slider [signal]="filter.Q"
+            style="color:grey"
+            [min]="0.0"
+            [max]="10.0"
+            [name]="'Q'"></app-slider>
 

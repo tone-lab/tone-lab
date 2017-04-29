@@ -5,7 +5,7 @@
                  [activeOption]="currentClass"></app-toggles>
 </div>
 
-<app-sink [name]="'freq'" [signal]="osc.frequency"></app-sink>
+<app-sink [name]="'freq'" [parent]="'osc'" [signal]="osc.frequency"></app-sink>
 
 <app-toggles [options]="types" *ngIf="currentClass !== 2 && currentClass !== 5"
              [name]="'waveform'"

@@ -10,13 +10,13 @@
     <span class="tag">{{ beats?.toFixed(0) }}</span>
 </div>
 
-        <div class="mixer-channel" *ngFor="let c of channels">
+        <div class="mixer-channel" *ngFor="let c of channels; let i = index">
             <app-slider [signal]="c.gain"
                         style="color:grey"
                         [min]="0.0"
                         [max]="1.0"
                         [name]="'volume'"></app-slider>
             <br>
-            <app-sink [signal]="c"></app-sink>
+            <app-sink [signal]="c" [parent]="'master'" [name]="'ch'+(i + 1)"></app-sink>
         </div>
 

@@ -8,6 +8,6 @@
 </svg>
 <br>
 <div class="analyser-right">
-    <app-sink [name]="'in'" [signal]="fft"></app-sink>
+    <app-sink [name]="'in'" [parent]="'analyser'" [signal]="fft"></app-sink>
     <app-source [name]="'out'" [signal]="wave"></app-source>
 </div>

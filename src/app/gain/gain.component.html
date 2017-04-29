@@ -1,7 +1,5 @@
-
-
-        <app-sink [name]="'in'" [signal]="gain"></app-sink>
-        <br>
-        <app-sink [name]="'cv'" [signal]="gain.gain"></app-sink>
-        <br>
-        <app-source [name]="'out'" [signal]="gain"></app-source>
+<app-sink [name]="'in'" [parent]="'gain'" [signal]="gain"></app-sink>
+<br>
+<app-sink [name]="'cv'" [parent]="'gain'" [signal]="gain.gain"></app-sink>
+<br>
+<app-source [name]="'out'" [signal]="gain"></app-source>

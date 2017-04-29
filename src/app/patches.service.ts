@@ -18,6 +18,25 @@ export class PatchesService {
         this.connections.push({source, sink});
     }
 
+    public notConnected(source: SourceComponent, sink: SinkComponent) {
+        return _.isUndefined(
+            _.find(
+                this.connections,
+                ({source: a, sink: b}) => (a === source) && (b === sink)));
+    }
+
+    public getConnectionsFor(source: SourceComponent) {
+        return _.filter(this.connections, ({source: a}) => a === source);
+    }
+
+    public removeConnection(source: SourceComponent, i: number) {
+        const sinks = this.getConnectionsFor(source);
+        const r = _.remove(this.connections, ({source: a, sink: b}) => {
+            return a === source && b === sinks[i].sink;
+        });
+        return r;
+    }
+
     public registerTarget(el: ElementRef, sink: SinkComponent)
     {
         // TODO: use el.getBoundingClientRect()

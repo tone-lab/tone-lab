@@ -4,3 +4,32 @@
   display: inline-block;
   cursor: pointer;
 }
+
+.patch-menu {
+  position: absolute;
+  background-color: whitesmoke;
+  width: 128px;
+}
+.patch-menu-close {
+  font-size: 8px;
+  font-weight: bold;
+  padding: 4px;
+  display: block;
+  cursor: pointer;
+}
+.patch-menu-close:hover {
+  background-color: red;
+}
+.patch-menu-item {
+  font-size: 8px;
+  font-weight: bold;
+  padding: 4px;
+  display: block;
+  cursor: pointer;
+}
+.patch-menu-item:hover {
+  background-color: red;
+}
+.patch-menu-item:hover:after {
+  content: '[delete] ';
+}

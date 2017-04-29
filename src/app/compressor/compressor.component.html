@@ -1,29 +1,26 @@
+<app-slider [signal]="comp.threshold"
+            style="color:grey"
+            [min]="-60.0"
+            [max]="0.0" [name]="'threshold'"></app-slider>
+<app-slider [signal]="comp.attack"
+            style="color:grey"
+            [min]="0.0"
+            [max]="1.0" [name]="'attack'"></app-slider>
+<app-slider [signal]="comp.release"
+            style="color:grey"
+            [min]="0.0"
+            [max]="1.0" [name]="'release'"></app-slider>
+<app-slider [signal]="comp.knee"
+            style="color:grey"
+            [min]="0.0"
+            [max]="60.0" [name]="'knee'"></app-slider>
+<app-slider [signal]="comp.ratio"
+            style="color:grey"
+            [min]="0.0"
+            [max]="20.0" [name]="'ratio'"></app-slider>
 
-
-
-        <app-slider [signal]="comp.threshold"
-                    style="color:grey"
-                    [min]="-60.0"
-                    [max]="0.0" [name]="'threshold'"></app-slider>
-        <app-slider [signal]="comp.attack"
-                    style="color:grey"
-                    [min]="0.0"
-                    [max]="1.0" [name]="'attack'"></app-slider>
-        <app-slider [signal]="comp.release"
-                    style="color:grey"
-                    [min]="0.0"
-                    [max]="1.0" [name]="'release'"></app-slider>
-        <app-slider [signal]="comp.knee"
-                    style="color:grey"
-                    [min]="0.0"
-                    [max]="60.0" [name]="'knee'"></app-slider>
-        <app-slider [signal]="comp.ratio"
-                    style="color:grey"
-                    [min]="0.0"
-                    [max]="20.0" [name]="'ratio'"></app-slider>
-
-        <div class="comp-right">
-            <span class="comp-reduction">{{ reduction.toFixed(2) }}</span><br>
-            <app-sink [name]="'in'" [signal]="comp"></app-sink>
-            <app-source [name]="'out'" [signal]="comp"></app-source>
-        </div>
+<div class="comp-right">
+    <span class="comp-reduction">{{ reduction.toFixed(2) }}</span><br>
+    <app-sink [name]="'in'" [parent]="'comp'" [signal]="comp"></app-sink>
+    <app-source [name]="'out'" [signal]="comp"></app-source>
+</div>
