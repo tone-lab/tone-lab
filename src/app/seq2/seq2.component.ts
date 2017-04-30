@@ -19,6 +19,8 @@ export class Seq2Component implements OnInit {
     pulse: boolean = false;
     position: number = 0;
 
+    that = this;
+
     gate;
     @ViewChild('source') source: SourceComponent;
 

@@ -8,9 +8,10 @@
                         [max]="1.0"
                         [name]="i + 1"></app-slider>
 
-            <app-toggles [options]="[0, 1]"
-                         (toggle)="activeSignals[i] = $event"
-                         [activeOption]="activeSignals[i]"></app-toggles>
+            <a (click)="activeSignals[i] = !activeSignals[i]"
+               class="binary-toggle"
+               [class.active]="activeSignals[i]">{{ activeSignals[i] ? '1' : '0' }}</a>
+
         </div>
 
         <div class="seq-left">

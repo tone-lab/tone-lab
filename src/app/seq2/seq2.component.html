@@ -21,9 +21,14 @@
 <div class="seq-right">
 
     <app-sink [name]="'clk'"
-              (gate)="clockSignal($event)"
+              [thingToClock]="that"
               [parent]="'clk'"
               [signal]="clock"></app-sink>
+
+    <!--<app-sink [name]="'clk'"-->
+    <!--(gate)="clockSignal($event)"-->
+    <!--[parent]="'clk'"-->
+    <!--[signal]="clock"></app-sink>-->
     <br>
 
     <app-source [name]="'cv'" [signal]="freq"></app-source>

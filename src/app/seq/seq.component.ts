@@ -69,7 +69,7 @@ export class SeqComponent implements OnInit {
         this.sequence = new Tone.Sequence((time, i) => {
 
 
-            if (this.activeSignals[i] === 1) {
+            if (this.activeSignals[i]) {
                 // from A0 to C8
                 this.freqConv.index = this.signals[i].value;
                 this.freq.linearRampToValue(this.freqConv.value, 0.01, time);

@@ -15,6 +15,7 @@ export class SinkComponent implements AfterViewInit, OnDestroy {
     @Input() signal;
     @ViewChild('socket') socket: ElementRef;
     @Output() gate = new EventEmitter<{time: number, tick: number}>();
+    @Input() thingToClock;
 
     isSelected: boolean = false;
 
@@ -40,6 +41,9 @@ export class SinkComponent implements AfterViewInit, OnDestroy {
     }
 
     sendClock(time, tick) {
-        this.gate.emit({time, tick});
+        // this.gate.emit({time, tick});
+        if (!_.isUndefined(this.thingToClock)) {
+            this.thingToClock.clockSignal({time, tick});
+        }
     }
 }
