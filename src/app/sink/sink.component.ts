@@ -1,5 +1,7 @@
-import {AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 import {PatchesService} from "../patches.service";
+
+import * as _ from 'lodash';
 
 @Component({
     selector: 'app-sink',
@@ -12,6 +14,7 @@ export class SinkComponent implements AfterViewInit, OnDestroy {
     @Input() parent: string = '';
     @Input() signal;
     @ViewChild('socket') socket: ElementRef;
+    @Output() gate = new EventEmitter<{time: number, tick: number}>();
 
     isSelected: boolean = false;
 
@@ -34,5 +37,9 @@ export class SinkComponent implements AfterViewInit, OnDestroy {
 
     ngOnDestroy() {
         this.patches.deregisterTarget(this);
+    }
+
+    sendClock(time, tick) {
+        this.gate.emit({time, tick});
     }
 }

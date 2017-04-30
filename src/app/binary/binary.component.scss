@@ -1,0 +1,22 @@
+
+.binary-toggle > a {
+  padding: 4px;
+  background-color: whitesmoke;
+  margin: 0 4px 4px 0;
+  display: block;
+  cursor: pointer;
+  text-align: center;
+}
+.binary-toggle > a.active {
+  padding: 4px;
+  background-color: lightblue;
+  margin: 0 4px 4px 0;
+  display: block;
+}
+
+.binary-toggle-label {
+  font-size: 8px;
+  margin: 0 4px 4px 0;
+  font-weight: bold;
+  text-transform: uppercase;
+}

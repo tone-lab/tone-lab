@@ -4,8 +4,10 @@
                  (toggle)="setClass($event)"
                  [activeOption]="currentClass"></app-toggles>
 </div>
-
-<app-sink [name]="'freq'" [parent]="'osc'" [signal]="osc.frequency"></app-sink>
+<div class="osc-left">
+    <app-sink [name]="'cv'" [parent]="'osc'" [signal]="cvIn"></app-sink><br>
+    <app-sink [name]="'freq'" [parent]="'osc'" [signal]="osc.frequency"></app-sink>
+</div>
 
 <app-toggles [options]="types" *ngIf="currentClass !== 2 && currentClass !== 5"
              [name]="'waveform'"

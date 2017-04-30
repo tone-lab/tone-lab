@@ -1,0 +1,26 @@
+.seq-signals {
+  float: left;
+}
+
+a.binary-toggle {
+  padding: 4px;
+  background-color: whitesmoke;
+  margin: 0 4px 4px 0;
+  display: block;
+  cursor: pointer;
+  text-align: center;
+  font-size: 8px;
+  margin: 0 4px 4px 0;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+a.binary-toggle.active {
+  padding: 4px;
+  background-color: lightblue;
+  margin: 0 4px 4px 0;
+  display: block;
+}
+
+.seq-right {
+  float: right;
+}

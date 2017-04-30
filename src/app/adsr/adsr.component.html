@@ -1,0 +1,44 @@
+
+
+<app-toggles [options]="rangeLabels"
+             [name]="'range'"
+             class="adsr-range-toggle"
+             (toggle)="setRange($event)"
+             [activeOption]="activeRange"></app-toggles>
+
+<app-slider (change)="adsr.attack = $event"
+            [style.color]="'grey'"
+            [min]="0"
+            [max]="ranges[activeRange].max"
+            [defaultValue]="0.1"
+            [name]="'Attack'"></app-slider>
+<app-slider (change)="adsr.decay = $event"
+            [style.color]="'grey'"
+            [min]="0"
+            [max]="ranges[activeRange].max"
+            [defaultValue]="0.0"
+            [name]="'Decay'"></app-slider>
+<app-slider (change)="adsr.sustain = $event"
+            [style.color]="'grey'"
+            [min]="0.0"
+            [max]="1.0"
+            [defaultValue]="1.0"
+            [name]="'Sustain'"></app-slider>
+<app-slider (change)="adsr.release = $event"
+            [style.color]="'grey'"
+            [min]="0"
+            [max]="ranges[activeRange].max"
+            [defaultValue]="0.1"
+            [name]="'Release'"></app-slider>
+<div class="adsr-out">
+    <app-sink [name]="'gate'"
+              (gate)="gateSignal($event)"
+              [parent]="'adsr'"
+              [signal]="gate"></app-sink>
+    <br>
+    <app-sink [name]="'trig'" (gate)="reTrigger($event)" [parent]="'adsr'" [signal]="trigger"></app-sink>
+    <br>
+    <app-source [name]="'env'" [signal]="adsr"></app-source>
+    <br>
+    <app-source [name]="'inv'" [signal]="inv"></app-source>
+</div>

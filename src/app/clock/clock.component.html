@@ -1,0 +1,7 @@
+<app-source #source [name]="'clock'" [signal]="clock"></app-source>
+<br>
+<app-toggles [options]="displayLengths"
+             class="clock-period-toggle"
+             [name]="'Divide'"
+             (toggle)="setPeriod($event)"
+             [activeOption]="currentPeriod"></app-toggles>

@@ -25,6 +25,10 @@ import { FrameComponent } from './frame/frame.component';
 import { TriggerComponent } from './trigger/trigger.component';
 import { AnalyserComponent } from './analyser/analyser.component';
 import { MembraneComponent } from './membrane/membrane.component';
+import { AdsrComponent } from './adsr/adsr.component';
+import { ClockComponent } from './clock/clock.component';
+import { Seq2Component } from './seq2/seq2.component';
+import { BinaryComponent } from './binary/binary.component';
 
 @NgModule({
     declarations: [
@@ -48,7 +52,11 @@ import { MembraneComponent } from './membrane/membrane.component';
         FrameComponent,
         TriggerComponent,
         AnalyserComponent,
-        MembraneComponent
+        MembraneComponent,
+        AdsrComponent,
+        ClockComponent,
+        Seq2Component,
+        BinaryComponent
     ],
     imports: [
         BrowserModule,

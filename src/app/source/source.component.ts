@@ -120,6 +120,12 @@ export class SourceComponent implements AfterViewInit, OnDestroy {
         });
     }
 
+    sendClock(time, tick) {
+        _.map(
+            this.patches.getConnectionsFor(this),
+            ({sink}) => sink.sendClock(time, tick));
+    }
+
     ngOnDestroy() {
         const old = this.patches.removeConnectionsFor(this);
         this.signal.disconnect(old.signal);

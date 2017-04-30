@@ -11,6 +11,8 @@ export class OscComponent {
 
     osc;
 
+    cvIn;
+
     currentType = 0;
     types = ['sine', 'sawtooth', 'square', 'triangle'];
 
@@ -19,6 +21,10 @@ export class OscComponent {
 
     constructor() {
         this.osc = new Tone.OmniOscillator().start();
+        this.cvIn = new Tone.Scale(
+            Tone.Frequency('C3').toFrequency(),
+            Tone.Frequency('C7').toFrequency());
+        this.cvIn.connect(this.osc.frequency);
     }
 
     updateType() {
