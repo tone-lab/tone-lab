@@ -1,6 +1,10 @@
-<div class="seq-signals" *ngFor="let c of signals; let i = index">
+
+
+
+<div class="seq-signals" *ngFor="let c of seq.values; let i = index">
+
     <app-slider [signal]="c"
-                [style.color]="i === position ? 'red' : 'grey'"
+                [style.color]="seq.state === i ? 'red' : 'grey'"
                 [min]="0.0"
                 [max]="1.0"
                 [name]="i + 1"></app-slider>
@@ -9,9 +13,9 @@
                 <!--(toggle)="activeSignals[i] = $event"-->
                 <!--[active]="activeSignals[i]"></app-binary>-->
 
-        <a (click)="activeSignals[i] = !activeSignals[i]"
+        <a (click)="seq.active[i] = !seq.active[i]"
            class="binary-toggle"
-           [class.active]="activeSignals[i]">{{ activeSignals[i] ? '1' : '0' }}</a>
+           [class.active]="seq.active[i]">{{ seq.active[i] ? '1' : '0' }}</a>
 
     <!--<app-toggles [options]="[0, 1]"-->
                  <!--(toggle)="activeSignals[i] = $event"-->
@@ -21,9 +25,8 @@
 <div class="seq-right">
 
     <app-sink [name]="'clk'"
-              [thingToClock]="that"
               [parent]="'clk'"
-              [signal]="clock"></app-sink>
+              [signal]="seq.clock"></app-sink>
 
     <!--<app-sink [name]="'clk'"-->
     <!--(gate)="clockSignal($event)"-->
@@ -31,8 +34,8 @@
     <!--[signal]="clock"></app-sink>-->
     <br>
 
-    <app-source [name]="'cv'" [signal]="freq"></app-source>
+    <app-source [name]="'cv'" [signal]="seq.cv"></app-source>
     <br>
-    <app-source #source [name]="'gate'" [signal]="gate"></app-source>
+    <app-source #source [name]="'gate'" [signal]="seq.gate"></app-source>
 </div>
 

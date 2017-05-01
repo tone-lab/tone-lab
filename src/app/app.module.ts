@@ -29,6 +29,7 @@ import { AdsrComponent } from './adsr/adsr.component';
 import { ClockComponent } from './clock/clock.component';
 import { Seq2Component } from './seq2/seq2.component';
 import { BinaryComponent } from './binary/binary.component';
+import { DividerComponent } from './divider/divider.component';
 
 @NgModule({
     declarations: [
@@ -56,7 +57,8 @@ import { BinaryComponent } from './binary/binary.component';
         AdsrComponent,
         ClockComponent,
         Seq2Component,
-        BinaryComponent
+        BinaryComponent,
+        DividerComponent
     ],
     imports: [
         BrowserModule,

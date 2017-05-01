@@ -32,11 +32,10 @@
             [name]="'Release'"></app-slider>
 <div class="adsr-out">
     <app-sink [name]="'gate'"
-              (gate)="gateSignal($event)"
               [parent]="'adsr'"
-              [signal]="gate"></app-sink>
+              [signal]="input"></app-sink>
     <br>
-    <app-sink [name]="'trig'" (gate)="reTrigger($event)" [parent]="'adsr'" [signal]="trigger"></app-sink>
+    <app-sink [name]="'trig'" [parent]="'adsr'" [signal]="trigger"></app-sink>
     <br>
     <app-source [name]="'env'" [signal]="adsr"></app-source>
     <br>

@@ -14,11 +14,15 @@
         <app-osc *ngSwitchCase="'Oscillator'"></app-osc>
         <app-pingpong *ngSwitchCase="'Ping Pong'"></app-pingpong>
         <app-seq *ngSwitchCase="'Sequencer'"></app-seq>
+        <app-seq2 *ngSwitchCase="'Sequencer #2'"></app-seq2>
         <app-compressor *ngSwitchCase="'Compressor'"></app-compressor>
         <app-signal *ngSwitchCase="'Slider'"></app-signal>
         <app-trigger *ngSwitchCase="'Trigger'"></app-trigger>
         <app-analyser *ngSwitchCase="'Analyser'"></app-analyser>
         <app-membrane *ngSwitchCase="'Membrane'"></app-membrane>
+        <app-clock *ngSwitchCase="'Clock'"></app-clock>
+        <app-adsr *ngSwitchCase="'Envelope'"></app-adsr>
+        <app-divider *ngSwitchCase="'Clock Divider'"></app-divider>
 
     </app-frame>
 </div>
@@ -30,12 +34,16 @@
 <a class="add-module-btn" (click)="add('LFO')">LFO</a>
 <a class="add-module-btn" (click)="add('Noise')">Noise</a>
 <a class="add-module-btn" (click)="add('Sequencer')">Sequencer</a>
+<a class="add-module-btn" (click)="add('Sequencer #2')">Sequencer #2</a>
 <a class="add-module-btn" (click)="add('Ping Pong')">Ping Pong</a>
 <a class="add-module-btn" (click)="add('Compressor')">Compressor</a>
 <a class="add-module-btn" (click)="add('Slider')">Slider</a>
 <a class="add-module-btn" (click)="add('Trigger')">Trigger</a>
 <a class="add-module-btn" (click)="add('Analyser')">Analyser</a>
 <a class="add-module-btn" (click)="add('Membrane')">Membrane</a>
+<a class="add-module-btn" (click)="add('Clock')">Clock</a>
+<a class="add-module-btn" (click)="add('Envelope')">Envelope</a>
+<a class="add-module-btn" (click)="add('Clock Divider')">Clock Divider</a>
 
 <app-patch-overlay *ngIf="showPatches"></app-patch-overlay>
 <br clear="both">

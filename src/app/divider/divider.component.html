@@ -1,0 +1,9 @@
+<app-sink [name]="'clock'" [parent]="'divider'" [signal]="input"></app-sink>
+<br>
+<app-toggles [options]="rangeLabels"
+             [name]="'divisor'"
+             class="divisor-toggle"
+             (toggle)="setRange($event)"
+             [activeOption]="divisor"></app-toggles>
+<br>
+<app-source [name]="'out'" [signal]="input"></app-source>

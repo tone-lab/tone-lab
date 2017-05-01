@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
+import {map} from 'lodash';
 declare const Tone: any;
 
 @Component({
@@ -20,15 +21,62 @@ export class AdsrComponent implements OnInit {
 
     adsr;
     gate;
-    trigger;
+    trigger: ScriptProcessorNode;
     inv;
+    input: ScriptProcessorNode;
+
+    latch: boolean = false;
 
     constructor() {
-        this.gate = new Tone.TimelineSignal(0);
-        this.trigger = new Tone.TimelineSignal(0);
         this.adsr = new Tone.Envelope();
         this.inv = new Tone.Negate();
         this.adsr.connect(this.inv);
+
+        this.input = Tone.context.createScriptProcessor(2048, 1, 1);
+        this.trigger = Tone.context.createScriptProcessor(2048, 1, 1);
+        const nullOut = Tone.context.createGain();
+        nullOut.gain.value = 0;
+        nullOut.connect(Tone.context.destination);
+        this.input.connect(nullOut);
+        this.trigger.connect(nullOut);
+
+
+        this.input.onaudioprocess = (e: AudioProcessingEvent) => {
+            const input = e.inputBuffer.getChannelData(0);
+
+            const delta = e.inputBuffer.duration / e.inputBuffer.length;
+            map(input, (v, i) => {
+                const time = e.playbackTime + (i * delta);
+
+                if (!this.latch && (v >= 0.5)) {
+                    // going high
+                    this.adsr.triggerAttack(time);
+                    this.latch = true;
+                }
+                else if (this.latch && (v < 0.5)) {
+                    // going low
+                    this.adsr.triggerRelease(time);
+                    this.latch = false;
+                }
+            });
+        };
+        this.trigger.onaudioprocess = (e: AudioProcessingEvent) => {
+            const input = e.inputBuffer.getChannelData(0);
+
+            const delta = e.inputBuffer.duration / e.inputBuffer.length;
+            map(input, (v, i) => {
+                const time = e.playbackTime + (i * delta);
+
+                if (!this.latch && (v >= 0.5)) {
+                    // going high
+                    this.adsr.triggerAttack(time);
+                    this.latch = true;
+                }
+                else if (this.latch && (v < 0.5)) {
+                    this.latch = false;
+                }
+            });
+        };
     }
 
     ngOnInit() {
@@ -40,17 +88,4 @@ export class AdsrComponent implements OnInit {
         // this.adsr.max = this.ranges[this.activeRange].max;
     }
 
-    gateSignal({time, tick}) {
-        if (tick === 1) {
-            this.adsr.triggerAttack(time);
-        }
-        else {
-            this.adsr.triggerRelease(time);
-        }
-    }
-    reTrigger({time, tick}) {
-        if (tick === 1) {
-            this.adsr.triggerAttack(time);
-        }
-    }
 }

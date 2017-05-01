@@ -56,7 +56,6 @@ export class SeqComponent implements OnInit {
             new Tone.Signal(0)
         ];
         this.activeSignals = _.fill(_.range(8), 1);
-        console.log(this.activeSignals);
         this.configureSequence();
     }
 
