@@ -1,4 +1,8 @@
-# Tonelab
+# [Tonelab](https://tone-lab.github.io/)
+
+Playing around with Web Audio and Angular 4.
+
+This is the source code behind - https://tone-lab.github.io/
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
