@@ -2,24 +2,10 @@ import {AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild} from 
 
 import * as _ from 'lodash';
 
-import {Observable} from "rxjs/Observable";
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/observable/interval';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/observable/combineLatest';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/takeUntil';
-import 'rxjs/add/operator/take';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/skipUntil';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/concat';
-import 'rxjs/add/operator/merge';
-
 import {PatchesService} from "../patches.service";
 import {CableComponent} from "../cable/cable.component";
-import {Subscription} from "rxjs/Subscription";
+import { Subscription, Observable, fromEvent, combineLatest } from 'rxjs';
+import { filter, tap, startWith, mergeMap, map, skipUntil, take } from 'rxjs/operators';
 
 
 @Component({
@@ -31,8 +17,8 @@ export class SourceComponent implements AfterViewInit, OnDestroy {
 
     @Input() name: string;
     @Input() signal;
-    @ViewChild('socket') socket: ElementRef;
-    @ViewChild('cable') cable: CableComponent;
+    @ViewChild('socket', { static: false }) socket: ElementRef;
+    @ViewChild('cable', { static: false }) cable: CableComponent;
 
     draggable: Subscription;
     menu: Subscription;
@@ -64,51 +50,66 @@ export class SourceComponent implements AfterViewInit, OnDestroy {
 
     ngAfterViewInit()
     {
-        this.menu = Observable.fromEvent(this.socket.nativeElement, 'mousedown')
-            .filter((e: MouseEvent) => ((e.which && e.which == 3) || (e.button && e.button == 2)))
-            .do((e: MouseEvent) => e.preventDefault())
-            // .do(e => this.menuActive = true)
-            // .mergeMap(e => Observable.fromEvent(document, 'mouseup')
-            //     .do(e => this.menuActive = false)
-            //     .take(1))
+        this.menu = fromEvent(this.socket.nativeElement, 'mousedown')
+            .pipe(
+                filter((e: MouseEvent) => ((e.which && e.which == 3) || (e.button && e.button == 2))),
+                tap((e: MouseEvent) => e.preventDefault())
+                // .do(e => this.menuActive = true)
+                // .mergeMap(e => Observable.fromEvent(document, 'mouseup')
+                //     .do(e => this.menuActive = false)
+                //     .take(1))
+            )
             .subscribe(() => this.menuActive = true);
 
 
-        const down = Observable.fromEvent(this.socket.nativeElement, 'mousedown')
-            .filter((e: MouseEvent) => !((e.which && e.which == 3) || (e.button && e.button == 2)))
-            .do((e: MouseEvent) => e.preventDefault())
-            .do((e: MouseEvent) => this.cable.startPatch(this.socket, e))
+        const down = fromEvent(this.socket.nativeElement, 'mousedown')
+            .pipe(
+                filter((e: MouseEvent) => !((e.which && e.which == 3) || (e.button && e.button == 2))),
+                tap((e: MouseEvent) => e.preventDefault()),
+                tap((e: MouseEvent) => this.cable.startPatch(this.socket, e)),
+                tap((e: MouseEvent) => {
+                    // const old = this.patches.removeConnectionsFor(this);
+                    // this.signal.disconnect(old.signal);
+                }),
+            );
 
-            .do((e: MouseEvent) => {
-                // const old = this.patches.removeConnectionsFor(this);
-                // this.signal.disconnect(old.signal);
-            });
+        const up = fromEvent(document, 'mouseup')
+            .pipe(
+                tap((e: MouseEvent) => e.preventDefault())
+            );
 
-        const up = Observable.fromEvent(document, 'mouseup')
-            .do((e: MouseEvent) => e.preventDefault());
+        const mouseMove = fromEvent(document, 'mousemove')
+            .pipe(
+                tap((e: MouseEvent) => e.stopPropagation())
+            );
+        const scrollWindow = fromEvent(document, 'scroll')
+            .pipe(
+                startWith({})
+            );
+        const move = combineLatest(mouseMove, scrollWindow);
 
-        const mouseMove = Observable.fromEvent(document, 'mousemove')
-            .do((e: MouseEvent) => e.stopPropagation());
-        const scrollWindow = Observable.fromEvent(document, 'scroll')
-            .startWith({});
-        const move = Observable.combineLatest(mouseMove, scrollWindow);
-
-        const drag = down.mergeMap((md: MouseEvent) => {
-            return move
-                .map(([mm, s]) => mm)
-                .do((mm: MouseEvent) => {
-                    this.cable.movePatch(mm);
-                    this.patches.resetSelection();
-                    const target = this.patches.locateTarget(mm);
-                    if (target) {
-                        target.isSelected = true;
-                    }
-                })
-                .skipUntil(up
-                    .take(1)
-                    .do(() => this.cable.endPatch()))
-                .take(1);
-        });
+        const drag = down.pipe(
+            mergeMap((md: MouseEvent) => move
+                .pipe(
+                    map(([mm, s]) => mm),
+                    tap((mm: MouseEvent) => {
+                        this.cable.movePatch(mm);
+                        this.patches.resetSelection();
+                        const target = this.patches.locateTarget(mm);
+                        if (target) {
+                            target.isSelected = true;
+                        }
+                    }),
+                    skipUntil(up
+                        .pipe(
+                            take(1),
+                            tap(() => this.cable.endPatch())
+                        )
+                    ),
+                    take(1)
+                )
+            )
+        );
 
         this.draggable = drag.subscribe((e: MouseEvent) => {
             const target = this.patches.locateTarget(e);

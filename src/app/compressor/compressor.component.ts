@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs/Subscription";
-import {IntervalObservable} from "rxjs/observable/IntervalObservable";
+import { Subscription, interval } from 'rxjs';
 
 declare const Tone: any;
 
@@ -18,7 +17,7 @@ export class CompressorComponent implements OnDestroy {
 
     constructor() {
         this.comp = new Tone.Compressor();
-        this.anim = IntervalObservable.create(500)
+        this.anim = interval(500)
             .subscribe(() => {
                 this.reduction = this.comp._compressor.reduction;
             });

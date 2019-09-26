@@ -2,10 +2,9 @@ import {
     AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output,
     ViewChild
 } from '@angular/core';
-import {Subscription} from "rxjs/Subscription";
-import {Observable} from "rxjs/Observable";
+import { fromEvent, Subscription } from 'rxjs';
+import { tap, mergeMap, takeUntil } from 'rxjs/operators';
 
-import 'rxjs/add/operator/startWith';
 
 import * as _ from 'lodash';
 declare const Tone: any;
@@ -24,7 +23,7 @@ export class SliderComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() defaultValue;
     @Output() change = new EventEmitter<number>();
 
-    @ViewChild('slider') slider: ElementRef;
+    @ViewChild('slider', { static: false }) slider: ElementRef;
     handle: Subscription;
     pt: SVGPoint;
     cursorPt: SVGPoint = {x: 0, y: 0} as any;
@@ -47,16 +46,13 @@ export class SliderComponent implements OnInit, AfterViewInit, OnDestroy {
     {
         this.pt = this.slider.nativeElement.createSVGPoint();
 
-        const down = Observable.fromEvent(this.slider.nativeElement, 'mousedown')
-            .do((md: MouseEvent) => md.preventDefault());
-        const move = Observable.fromEvent(document, 'mousemove')
-            .do((mm: MouseEvent) => mm.preventDefault());
-        const up = Observable.fromEvent(document, 'mouseup')
-            .do((mu: MouseEvent) => mu.preventDefault());
+        const down = fromEvent(this.slider.nativeElement, 'mousedown').pipe(tap((md: MouseEvent) => md.preventDefault()));
+        const move = fromEvent(document, 'mousemove').pipe(tap((mm: MouseEvent) => mm.preventDefault()));
+        const up = fromEvent(document, 'mouseup').pipe(tap((mu: MouseEvent) => mu.preventDefault()));
 
-        const drag = down.mergeMap((md: MouseEvent) => {
-           return move.startWith(md).takeUntil(up.take(1));
-        });
+        const drag = down.pipe(
+            mergeMap((md: MouseEvent) => move.pipe(takeUntil(up)))
+        );
 
         this.handle = drag
             .subscribe((md: MouseEvent) => {
