@@ -13,7 +13,7 @@ export class SinkComponent implements AfterViewInit, OnDestroy {
     @Input() name: string = '';
     @Input() parent: string = '';
     @Input() signal;
-    @ViewChild('socket') socket: ElementRef;
+    @ViewChild('socket', { static: true }) socket: ElementRef;
 
     isSelected: boolean = false;
 

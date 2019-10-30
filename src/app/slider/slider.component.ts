@@ -24,7 +24,7 @@ export class SliderComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() defaultValue;
     @Output() change = new EventEmitter<number>();
 
-    @ViewChild('slider') slider: ElementRef;
+    @ViewChild('slider', { static: true }) slider: ElementRef;
     handle: Subscription;
     pt: SVGPoint;
     cursorPt: SVGPoint = {x: 0, y: 0} as any;
