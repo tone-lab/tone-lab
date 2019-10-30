@@ -4,6 +4,7 @@ import {animationFrame} from 'rxjs/scheduler/animationFrame';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Rx';
 import { of } from 'rxjs/internal/observable/of';
+import { repeat } from 'rxjs/operators';
 declare const Tone: any;
 
 @Component({
@@ -26,7 +27,9 @@ export class AnalyserComponent implements OnInit, OnDestroy {
         this.fft.connect(this.wave);
 
         this.anim = of(0, animationFrame)
-            .repeat()
+          .pipe(
+            repeat()
+          )
             .subscribe(() => {
                 this.bands = this.fft.analyse();
                 this.wavePoints = this.wave.analyse();

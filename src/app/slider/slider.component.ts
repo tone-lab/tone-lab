@@ -8,6 +8,7 @@ import {
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Rx';
 import { fromEvent } from 'rxjs/internal/observable/fromEvent';
+import { mergeMap, startWith, take, takeUntil, tap } from 'rxjs/operators';
 declare const Tone: any;
 
 @Component({
@@ -46,15 +47,20 @@ export class SliderComponent implements OnInit, AfterViewInit, OnDestroy {
         this.pt = this.slider.nativeElement.createSVGPoint();
 
         const down = fromEvent(this.slider.nativeElement, 'mousedown')
-            .do((md: MouseEvent) => md.preventDefault());
+            .pipe(tap((md: MouseEvent) => md.preventDefault()));
         const move = fromEvent(document, 'mousemove')
-            .do((mm: MouseEvent) => mm.preventDefault());
+          .pipe(tap((md: MouseEvent) => md.preventDefault()));
         const up = fromEvent(document, 'mouseup')
-            .do((mu: MouseEvent) => mu.preventDefault());
+          .pipe(tap((md: MouseEvent) => md.preventDefault()));
 
-        const drag = down.mergeMap((md: MouseEvent) => {
-           return move.startWith(md).takeUntil(up.take(1));
-        });
+        const drag = down.pipe(
+          mergeMap((md: MouseEvent) => {
+            return move.pipe(
+              startWith(md),
+              takeUntil(up.pipe(take(1)))
+            );
+          })
+        );
 
         this.handle = drag
             .subscribe((md: MouseEvent) => {
