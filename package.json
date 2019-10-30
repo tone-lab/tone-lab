@@ -16,16 +16,15 @@
     "@angular/compiler": "^6.1.10",
     "@angular/core": "^6.1.10",
     "@angular/forms": "^6.1.10",
-    "@angular/http": "^6.1.10",
     "@angular/platform-browser": "^6.1.10",
     "@angular/platform-browser-dynamic": "^6.1.10",
     "@angular/router": "^6.1.10",
     "core-js": "^2.4.1",
     "lodash": "^4.17.13",
     "rxjs": "^6.5.3",
+    "rxjs-compat": "^6.0.0-rc.0",
     "tone": "^0.10.0",
-    "zone.js": "0.8.29",
-    "rxjs-compat": "^6.0.0-rc.0"
+    "zone.js": "0.8.29"
   },
   "devDependencies": {
     "@angular/cli": "^8.3.15",
