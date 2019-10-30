@@ -1,13 +1,13 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {IntervalObservable} from "rxjs/observable/IntervalObservable";
-import {Subscription} from "rxjs/Subscription";
-import {Observable} from "rxjs/Observable";
 
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/repeat';
-import {animationFrame} from "rxjs/scheduler/animationFrame";
+
+import {repeat} from 'rxjs/operators';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+
 
 import * as _ from 'lodash';
+import { Subscription } from 'rxjs/Rx';
+import { of } from 'rxjs/internal/observable/of';
+import { animationFrame } from 'rxjs/internal/scheduler/animationFrame';
 
 declare const Tone: any;
 
@@ -33,8 +33,8 @@ export class MixerComponent implements OnInit, OnDestroy {
         ];
         this.bpm = Tone.Transport.bpm;
 
-        this.anim = Observable.of(0, animationFrame)
-            .repeat()
+        this.anim = of(0, animationFrame).pipe(
+            repeat())
             .subscribe(() => {
                 this.beats = Tone.Transport.bpm.value;
             });

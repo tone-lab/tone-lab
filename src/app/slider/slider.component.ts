@@ -2,12 +2,12 @@ import {
     AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output,
     ViewChild
 } from '@angular/core';
-import {Subscription} from "rxjs/Subscription";
-import {Observable} from "rxjs/Observable";
 
-import 'rxjs/add/operator/startWith';
+
 
 import * as _ from 'lodash';
+import { Subscription } from 'rxjs/Rx';
+import { fromEvent } from 'rxjs/internal/observable/fromEvent';
 declare const Tone: any;
 
 @Component({
@@ -17,7 +17,7 @@ declare const Tone: any;
 })
 export class SliderComponent implements OnInit, AfterViewInit, OnDestroy {
 
-    @Input() name: string = '';
+    @Input() name = '';
     @Input() signal: AudioParam;
     @Input() min;
     @Input() max;
@@ -32,8 +32,7 @@ export class SliderComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor() {
     }
 
-    ngOnInit()
-    {
+    ngOnInit() {
         if (!this.signal) {
             this.signal = new Tone.Signal((!!this.defaultValue)
                 ? this.defaultValue
@@ -43,15 +42,14 @@ export class SliderComponent implements OnInit, AfterViewInit, OnDestroy {
         this.cursorPt = {x: 0, y: 128 - (scaledValue * 128)} as any;
     }
 
-    ngAfterViewInit()
-    {
+    ngAfterViewInit() {
         this.pt = this.slider.nativeElement.createSVGPoint();
 
-        const down = Observable.fromEvent(this.slider.nativeElement, 'mousedown')
+        const down = fromEvent(this.slider.nativeElement, 'mousedown')
             .do((md: MouseEvent) => md.preventDefault());
-        const move = Observable.fromEvent(document, 'mousemove')
+        const move = fromEvent(document, 'mousemove')
             .do((mm: MouseEvent) => mm.preventDefault());
-        const up = Observable.fromEvent(document, 'mouseup')
+        const up = fromEvent(document, 'mouseup')
             .do((mu: MouseEvent) => mu.preventDefault());
 
         const drag = down.mergeMap((md: MouseEvent) => {

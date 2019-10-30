@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs/Subscription";
-import {Observable} from "rxjs/Observable";
-import {animationFrame} from "rxjs/scheduler/animationFrame";
+import {animationFrame} from 'rxjs/scheduler/animationFrame';
 
 import * as _ from 'lodash';
+import { Subscription } from 'rxjs/Rx';
+import { of } from 'rxjs/internal/observable/of';
 declare const Tone: any;
 
 @Component({
@@ -25,7 +25,7 @@ export class AnalyserComponent implements OnInit, OnDestroy {
         this.wave = new Tone.Analyser('waveform', 256);
         this.fft.connect(this.wave);
 
-        this.anim = Observable.of(0, animationFrame)
+        this.anim = of(0, animationFrame)
             .repeat()
             .subscribe(() => {
                 this.bands = this.fft.analyse();
